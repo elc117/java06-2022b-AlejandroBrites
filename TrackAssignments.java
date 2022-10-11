@@ -29,57 +29,51 @@ class Assignment {
     this.pending = false;
   }
 
-
   public int daysLeft() {
     return dueDate.compareTo(LocalDate.now());
   }
-
-  private String status() {
-
-    if (this.pending == false)
-      return "done";
-
-    if (this.daysLeft() < 0) 
-      return "late";
-
-    return "due in " + this.daysLeft() + " days";
-  }
-
 
   public String message() {
     return "Assignment " + this.description + " is " + status();
     
   }
-
   
   public String toString() {
     return "{ dueDate='" + this.dueDate + "', description='" + this.description + "', pending='" + this.pending + "', submitDate='" + this.submitDate +"'}";
+  }
+  
+  public  String status() {
+
+    if (isPending() == false)
+      return "done";
+
+    if (daysLeft() < 0) 
+      return "late";
+
+    return "due in " + this.daysLeft() + " days";
   }
 
 }
 
 class GroupAssignment extends Assignment {
-  private String teamMates;
 
-  public String message() {
-    return  "Group Assignment jamboard is " + status();
-  
-  }
+  private String teamMates;
 
   public GroupAssignment(LocalDate dueDate, String description, String teamMates) {
     super(dueDate, description);
     this.teamMates = teamMates;
   }
-
-  private String status() {
-
-    if (this.pending == false)
-      return "done";
-
-    if (this.daysLeft() < 0) 
-      return "late - call " + this.teamMates;
-
-    return "due in " + this.daysLeft() + " days - call " + this.teamMates;
+  
+  public String message() {
+  
+    if (isPending() == false) {
+    
+      return  "Group" + super.message();
+    
+    }
+  		
+    return  "Group" + super.message() + " - call " + this.teamMates;
+  
   }
   
 }
