@@ -42,7 +42,7 @@ class Assignment {
     return "{ dueDate='" + this.dueDate + "', description='" + this.description + "', pending='" + this.pending + "', submitDate='" + this.submitDate +"'}";
   }
   
-  public  String status() {
+  private  String status() {
 
     if (isPending() == false)
       return "done";
@@ -68,11 +68,11 @@ class GroupAssignment extends Assignment {
   
     if (isPending() == false) {
     
-      return  "Group" + super.message();
+      return  "Group " + super.message();
     
     }
   		
-    return  "Group" + super.message() + " - call " + this.teamMates;
+    return  "Group " + super.message() + " - call " + this.teamMates;
   
   }
   
